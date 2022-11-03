@@ -12,7 +12,7 @@ function UserData() {
   }
   function games(status,time,green,violet,red,number){
     return new Promise((resolve, reject) => {
-      let sql = `INSERT INTO game_template(status,time,green,violet,red,number) values ("${status}","${time}","${green}",
+      let sql = `REPLACE INTO game_template(status,time,green,violet,red,number) values ("${status}","${time}","${green}",
       "${violet}","${red}","${number}") `;
       global.db.query(sql, function (err, result) {
         if (err) {
@@ -36,5 +36,17 @@ function UserData() {
       });
     });
   }
+  function templates() {
+    return new Promise((resolve, reject) => {
+      let sql = `SELECT * FROM game_template`;
+      global.db.query(sql, function (err, result) {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+        console.log(result);
+      });
+    });
+  }
 
-  module.exports={UserData,games,Update};
+  module.exports={UserData,games,Update,templates};

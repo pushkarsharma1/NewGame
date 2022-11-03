@@ -1,7 +1,7 @@
 
 const { generatePrimeSync } = require('crypto');
 const path = require('path')
-const {UserData ,games,Update} = require("../model/main.model");
+const {UserData ,games,Update,templates} = require("../model/main.model");
 
 async function mainPage(req , res) {
     console.log("This is the starting page ")
@@ -49,6 +49,15 @@ async function statusupdate(req ,res){
     }
 
 }
+async function template(req ,res){
+    try{
+        const data = await templates();
+        res.send(data);
+    }  catch (err){
+        console.log("Error",err)
+    }
+
+}
 
 
-  module.exports = { mainPage,admin,newgame,statusupdate}
+  module.exports = { mainPage,admin,newgame,statusupdate,template}
